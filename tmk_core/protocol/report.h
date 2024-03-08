@@ -105,7 +105,8 @@ enum consumer_usages {
     AC_STOP                        = 0x226,
     AC_REFRESH                     = 0x227,
     AC_BOOKMARKS                   = 0x22A,
-    AC_NEXT_KEYBOARD_LAYOUT_SELECT = 0x29D,
+    AC_GLOBE                       = 0x29D,
+//    AC_NEXT_KEYBOARD_LAYOUT_SELECT = 0x29D,
     AC_DESKTOP_SHOW_ALL_WINDOWS    = 0x29F,
     AC_SOFT_KEY_LEFT               = 0x2A0
 };
@@ -308,6 +309,8 @@ static inline uint16_t KEYCODE2CONSUMER(uint8_t key) {
             return AC_DESKTOP_SHOW_ALL_WINDOWS;
         case KC_LAUNCHPAD:
             return AC_SOFT_KEY_LEFT;
+        case KC_GLOBE:
+            return AC_GLOBE;
         default:
             return 0;
     }
