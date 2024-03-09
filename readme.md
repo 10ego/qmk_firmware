@@ -1,9 +1,15 @@
 # 10pino
-My own cheapino configurations.
-Ensure qmk build environment is ready. On mac, follow [this](https://docs.qmk.fm/#/newbs_getting_started?id=set-up-your-environment).
-In short, make sure qmk is installed (brew install qmk/qmk/qmk), then run QMK Setup (`qmk setup`).
-Once the environment is ready, run the `./flash.sh`.
+My own [cheapino](https://github.com/tompi/cheapino) configurations. 
+
+Ensure qmk build environment is ready. On mac, follow [this](https://docs.qmk.fm/#/newbs_getting_started?id=set-up-your-environment). In short, make sure qmk is installed (brew install qmk/qmk/qmk), then run QMK Setup
+
+```bash
+qmk setup
+```
+
+Once the environment is ready, run the `./flash.sh` shell script.
 The firmware should now flash the rp2040.
+
 When complete, reboot the chip by holding Reset then Boot together for a few seconds. The firmware should load.
 
 # Quantum Mechanical Keyboard Firmware
