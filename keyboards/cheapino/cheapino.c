@@ -89,3 +89,11 @@ void matrix_scan_user(void) {
         rgblight_disable();
     }
 }
+
+// manually configure the breathing mode because config.h won't pick it up for some reason
+// void matrix_init_user(void) {
+//     if (rgblight_is_enabled()) {
+//         rgblight_mode(RGBLIGHT_MODE_BREATHING);
+//     }
+// }
+
