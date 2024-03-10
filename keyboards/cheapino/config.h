@@ -23,8 +23,11 @@
 #define WS2812_PIO_USE_PIO1 // Force the usage of PIO1 peripheral, by default the WS2812 implementation uses the PIO0 peripheral
 //#define WS2812_TRST_US 80
 #define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB
+// rgb settings
 #define RGB_MATRIX_DEFAULT_VAL 32
-
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_EFFECT_BREATHING
+#define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
 
 // Pick good defaults for enabling homerow modifiers
 #define TAPPING_TERM 230

@@ -45,7 +45,6 @@ void keyboard_post_init_user(void) {
 // Make the builtin RGB led show different colors per layer:
 // This seemed like a good idea but turned out pretty annoying,
 // to me at least... Uncomment the lines below to enable
-/*
 uint8_t get_hue(uint8_t layer) {
     switch (layer) {
         case 6:
@@ -72,4 +71,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_sethsv(hue, sat, val);
     return state;
 }
-*/
+
+// This tracks if the keyboard has been active in the last 10 seconds
+// and turns the rgb light off if inactive. otherwise it does nothing.
+uint32_t last_key_pressed_time = 0;
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed){
+        last_key_pressed_time = timer_read32();
+        if (!rgblight_is_enabled()) {
+            rgblight_enable();
+        }
+    }
+    return true;
+}
+void matrix_scan_user(void) {
+    if (timer_elapsed32(last_key_pressed_time) > 10000) {
+        rgblight_disable();
+    }
+}
