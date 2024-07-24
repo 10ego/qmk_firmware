@@ -72,7 +72,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-// This tracks if the keyboard has been active in the last 10 seconds
+// This tracks if the keyboard has been active in the last 60 seconds
 // and turns the rgb light off if inactive. otherwise it does nothing.
 uint32_t last_key_pressed_time = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -85,7 +85,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 void matrix_scan_user(void) {
-    if (timer_elapsed32(last_key_pressed_time) > 10000) {
+    if (timer_elapsed32(last_key_pressed_time) > 60000) {
         rgblight_disable();
     }
 }

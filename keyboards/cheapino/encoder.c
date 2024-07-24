@@ -5,20 +5,48 @@
 
 static bool colABpressed = false;
 static bool encoderPressed = false;
+static bool lgui_held = false;
 
 void clicked(void) {
-    tap_code(KC_MPLY);
+    if (IS_LAYER_ON(1)) {
+        // media play / pause
+        tap_code(KC_MPLY);
+    } else if (IS_LAYER_ON(2)) {
+        // releaseq LGUI key and switch to selected window
+        unregister_code(KC_LGUI);
+        lgui_held = false;
+    } else if (IS_LAYER_ON(4)) {
+        // move window down
+        tap_code16(LAG(LSFT(KC_DOWN)));
+    } else {
+        // mute
+        tap_code(KC_MUTE);
+    }
 }
 
 void turned(bool clockwise) {
-    if (IS_LAYER_ON(6)) {
-        tap_code(clockwise ? KC_VOLU : KC_VOLD);
-    } else if (IS_LAYER_ON(3)) {
-        tap_code16(clockwise ? LCTL(KC_TAB) : LCTL(LSFT(KC_TAB)));
-    } else if (IS_LAYER_ON(5)) {
-        tap_code(clockwise ? KC_MS_WH_DOWN : KC_MS_WH_UP);
+    if (IS_LAYER_ON(1)) {
+        // next / prev media
+        tap_code16(clockwise ? KC_MNXT : LSFT(KC_MPRV));
+    } else if (IS_LAYER_ON(2)) {
+        // hold LGUI and press tab / shift+tab until encoder is clicked
+        if (!lgui_held) {
+            register_code(KC_LGUI);
+            lgui_held=true;
+        }
+        if (clockwise) {
+            tap_code(KC_TAB);
+        } else {
+            register_code(KC_LSFT);
+            tap_code(KC_TAB);
+            unregister_code(KC_LSFT);
+        }
+    } else if (IS_LAYER_ON(4)) {
+        // move window left / right
+        tap_code16(clockwise ? LAG(LSFT(KC_RIGHT)) : LAG(LSFT(KC_LEFT)));
     } else {
-        tap_code16(clockwise ? LGUI(KC_Y) : LGUI(KC_Z));
+        // volume up / down
+        tap_code(clockwise ? KC_VOLU : KC_VOLD);
     }
 }
 
